@@ -1,0 +1,48 @@
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/prof.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script type="application/json" src="../js/prof.js"></script> -->
+</head>
+<body>
+
+  <div class="sidebar">
+    
+    <div style="font-size: 32px;padding:5px 140px;position:relative;top:60px;"><i class="fa fa-user fa-5x" style="color:black" aria-hidden="true"></i>
+    </div>
+      <ul class="sidebar-list">
+        <% for(var i=1;i<=3;i++){ %>
+            <li class="sidebar-item"><a class="sidebar-anchor" href="/profile/<%= i %>"><i class="fa fa-bus" style="color:black" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong>Bus <%=i%></strong></a></li>
+        <%  } %>
+        <li class="sidebar-item"><a href="/logout" class="sidebar-anchor"><i class="fa fa-sign-out" style="color:black" aria-hidden="true"></i>&nbsp;&nbsp;<strong>LogOut</strong></a></li>
+      </ul>
+      
+    </div>
+    
+    <div class="container">
+            <%- body -%>
+    </div>         
+        
+    <script>
+            $(document).ready(function() {
+       
+       function toggleSidebar() {
+         $(".button").toggleClass("active");
+         $("main").toggleClass("move-to-left");
+         $(".sidebar-item").toggleClass("active");
+       }
+       
+       $(".button").on("click tap", function() {
+         toggleSidebar();
+       });
+       
+       $(document).keyup(function(e) {
+         if (e.keyCode === 27) {
+           toggleSidebar();
+         }
+       });
+       
+       });
+        </script>
+       
+         </body>
