@@ -1,4 +1,4 @@
-<% layout('sidebar.ejs') -%>
+<% layout('sidebartest.ejs') -%>
 <!-- <div>
   <span class="circle">LNMIIT</span>
                 <span class="circle">RAJA PARK</span>
@@ -11,7 +11,7 @@
 <ul class="timeline" id="timeline">
   <li class="li complete">
     <div class="timestamp">
-      <span class="author"><strong><%=  current_bus_details.startLocation.title%></strong></span>
+      <span class="author"><strong>LNMIIT</strong></span>
       <!-- <span class="date">11/15/2014<span> -->
     </div>
     <div class="status">
@@ -29,7 +29,7 @@
   </li>
   <li class="li complete">
     <div class="timestamp">
-      <span class="author"><strong><%=  current_bus_details.endLocation.title%></strong></span>
+      <span class="author"><strong>AJMERI GATE</strong></span>
       <!-- <span class="date">11/15/2014<span> -->
     </div>
     <div class="status">
@@ -64,27 +64,27 @@
               <tr>
                 <td><strong style="font-size: 0.9em;word-spacing: 5px;">Route</strong></td>
                 <td id="aa"> <i class="fa fa-bus" style="color:black" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;">
-               <%=  current_bus_details.route.info.replace("TO","-->") %>
+               LNMIIT --> AJMERI GATE
                 </strong></td>
               </tr>
               <tr>
                 <td><strong style="font-size: 0.9em;word-spacing: 5px;">Time</strong></td>
-                  <td id="bb"><i class="fa fa-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;"><%= current_bus_details.timing.startTime %></strong></td>
+                  <td id="bb"><i class="fa fa-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;">16:15:00</strong></td>
                 </strong></td>
               </tr>
               <tr>
                 <td><strong style="font-size: 0.9em;word-spacing: 5px;">DriverName</strong></td>
-                  <td id="cc"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;"><%= current_bus_details.driver.firstName %> <%= current_bus_details.driver.lastName %></strong></td>
+                  <td id="cc"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;">LAXMAN SINGH</strong></td>
                 </strong></td>
               </tr>
               <tr>
                 <td><strong style="font-size: 0.9em;word-spacing: 5px;">Phone No.</strong></td>
-                  <td id="dd"><i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;"><%= current_bus_details.driver.userMobile %></strong></td>
+                  <td id="dd"><i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;">8003666666</strong></td>
                 </strong></td>
               </tr>
               <tr>
                 <td><strong style="font-size: 0.9em;word-spacing: 5px;">Fare</strong></td>
-                  <td id="ee"><i class="fa fa-rupee-sign"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;"><%= current_bus_details.route.fare %></strong></td>
+                  <td id="ee"><i class="fa fa-rupee-sign"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="font-size: 0.7em;word-spacing: 5px;">25</strong></td>
                 </strong></td>
               </tr>
               </tbody>
@@ -97,7 +97,8 @@
 				</iframe>
     <!-- <img id="myImg" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="Snow" style="width:100%;max-width:300px;height: 200px;"> -->
   </div>    
-  <a class="btn btn-warning" href="/profile/<%= bid%>/edit">Edit</a>
+  <a class="btn btn-warning" href="/profile/">Edit</a>
+  <a class="btn btn-warning" href="/profile/">Resolve</a>
 
 </div>
      

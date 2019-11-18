@@ -45,11 +45,11 @@
               <!-- <input type="text" class="form-control form-rounded" placeholder="Search Route"> -->
               <!-- <ul id="wrapper"> -->
                  
-                      <% for(var i=0;i<= bus_count-1;i++){ %>
+                      <% for(var i=0;i<= 5;i++){ %>
                         <li>
-                        <span style="font-size: 0.8em;word-spacing: 5px;"> <i class="fa fa-clock"></i> <%= bus_details[i].timing.startTime %></span>
+                        <span style="font-size: 0.8em;word-spacing: 5px;"> <i class="fa fa-clock"></i> 16:15:00</span>
                        
-                        <a class="sidebar-anchor"  style="text-decoration: none;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 0.7em;word-spacing: 5px;font-size: 0.8em;" href="/profile/<%= bus_details[i].uId %>">&nbsp;&nbsp;&nbsp;<%=  bus_details[i].route.info.replace("TO","-->") %></a>
+                        <a class="sidebar-anchor"  style="text-decoration: none;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: 0.7em;word-spacing: 5px;font-size: 0.8em;" href="/profile">&nbsp;&nbsp;&nbsp;LNMIIT --> RAJA PARK</a>
                         </li>
                             <%  } %>
                         <!-- <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bus_1</a> -->

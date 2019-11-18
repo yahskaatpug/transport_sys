@@ -119,29 +119,12 @@ app.get("/register",function(req,res){//show signUp page
 			
 		})
 	});
-	
-	app.get("/profile",isLoggedIn,function(req,res){
-		var option_1 =  busDetails(1);
-	 request(option_1, function (error, response, body_1) {
-		var bus_detail = [];
-		var count = 0;
-		if (!error && response.statusCode == 200) {
-			body_1.vehicleList.forEach(element => {
-					bus_detail.push(element);
-					count++;
-				
-			});
-			// console.log(bus_detail);
-			res.render("profile",{bus_details:bus_detail,bus_count:count});
-				
-		}
-	});
-});
-
-
 
 app.get("/profile/:id",isLoggedIn, function(req,res){
+	//
+	//res = busDetails;
 	var option_1 =  busDetails(1);
+	var bid=req.params.id;
 	 request(option_1, function (error, response, body_1) {
 		var bus_detail = [];
 		var count = 0;
@@ -157,14 +140,80 @@ app.get("/profile/:id",isLoggedIn, function(req,res){
 			});
 			console.log(current_bus_detail);
 						
-			res.render("bus_detail",{bus_details:bus_detail,bus_count:count,current_bus_details:current_bus_detail});
-					
+			//res.render("bus_detail",{bid:bid,bus_details:bus_detail,bus_count:count,current_bus_details:current_bus_detail});
+			res.render("test");		
 		}
 	});
 	
 	//res.render("bus_detail");
 
 });
+//var x;
+//app.get("/profile/suspicious",isLoggedIn,function(req,res){
+
+	// var requestLoop =   setInterval(function(){
+	// 	request({
+	// 			url: "http://intermediasutra-env.w84r34bwj9.ap-south-1.elasticbeanstalk.com/webapi/liveStatus/getStatus",
+	// 			method: "GET",
+	// 			timeout: 5000,
+	// 			followRedirect: true,
+	// 			maxRedirects: 1000
+	// 	},function(error, response, body){
+	// 	//	var suspi;
+	// 			if(!error && response.statusCode == 200){
+	// 					console.log('success'+(response.body));
+						
+	// 					//console.log('busid'+response.message);
+	// 					 suspi=JSON.parse(response.body).uId;
+							
+	// 					console.log("suspi",suspi);
+	// 					 var r = {
+	// 						 "vehicleId" : suspi
+	// 					 }
+	// 					  suspiAct = (weekday)=>{
+							 
+	// 						var option = {
+	// 							uri: 'http://intermediasutra-env.w84r34bwj9.ap-south-1.elasticbeanstalk.com/webapi/vehicle/get',
+	// 							method: 'POST',
+	// 							json: r 
+	// 						};
+	// 						return option; 
+	// 					}
+				
+	// 			}else{
+	// 				//res.send(response.statuscode);
+	// 					console.log('error' + response.statusCode);
+	// 			}
+	// 			return suspi;
+	// 	});
+	// }, 5000);
+
+
+
+	app.get("/profile",isLoggedIn,function(req,res){
+				var option_1 = busDetails(1);
+  
+			request(option_1, function (error, response, body_1) {
+				console.log(response);
+			   var bus_detail = [];
+			   var count = 0;
+			   if (!error && response.statusCode == 200) {
+				   body_1.vehicleList.forEach(element => {
+						   bus_detail.push(element);
+						   count++;
+					   
+				   });
+				   res.render("profile",{bus_details:bus_detail,bus_count:count});
+					   
+			   }
+		   });
+	 }
+);
+//});
+
+// console.log(requestLoop);
+
+  
 //login routes
 // app.get('/profile/:id/new',function(req,res){
 	
@@ -196,17 +245,112 @@ app.get("/profile/:id",isLoggedIn, function(req,res){
 
 //login logic
 //middleware
+
+
+
+app.get("/profile/:id/edit",function(req,res){
+	var option_1 =  busDetails(1);
+	var bid=req.params.id;
+	 request(option_1, function (error, response, body_1) {
+		var bus_detail = [];
+		var count = 0;
+		var current_bus_detail = {};
+		if (!error && response.statusCode == 200) {
+			body_1.vehicleList.forEach(element => {
+					bus_detail.push(element);
+					count++;
+					if(element.uId === req.params.id){
+						current_bus_detail = element;
+					}
+				
+			});
+			console.log(current_bus_detail);
+						
+			res.render("edit",{bid:bid,bus_details:bus_detail,bus_count:count,current_bus_details:current_bus_detail});
+					
+		}
+	});
+});
+
+app.put("/profile/:id",function(req,res){//update route
+	//var option_1 =  busDetails(1);
+	var routeInfo=req.body.routeInfo;
+	var startTime=req.body.startTime;
+	var driverName=req.body.driverName;
+	var mobileNum=req.body.mobileNum;
+	var fare=req.body.fare;
+	//var updateData={routeInfo:routeInfo,startTime:startTime,driverName:driverName,mobileNum:mobileNum,fare:fare};
+// 	request(updateData,function(err,driverUpdate){//edit route
+// //function given by mongoose
+// 	if(err)
+// 		console.log(err);
+// 	else
+// 		res.redirect("/profile/"+req.params.id);
+// });
+request.post('http://intermediasutra-env.w84r34bwj9.ap-south-1.elasticbeanstalk.com/webapi/vehicle/getVehicle',
+'UPDATE tutorials_tbl SET tutorial_title="Learning JAVA" WHERE tutorial_id=3', (error, res, body) => {
+	if (error) {
+	  console.error(error)
+	}
+	else
+	res.redirect("/profile/"+req.params.id);
+  })
+});
+
 app.post("/login",passport.authenticate("local",{
 			successRedirect:"/profile",
 			failureRedirect:"/login"
-}),function(req,res){
-
-});
+}),);
+// app.get("/redirect_r/:uId",(req,res,next)=>{
+// 	res.redirect("/profile/"+req.params.uId);
+// })
+//if(isLoggedin){
+// 			var requestLoop = setInterval(function(){
+// 		request({
+// 				url: "http://intermediasutra-env.w84r34bwj9.ap-south-1.elasticbeanstalk.com/webapi/liveStatus/getStatus",
+// 				method: "GET",
+// 				timeout: 2000,
+// 				followRedirect: true,
+// 				maxRedirects: 10
+// 		},function(error, response, body){
+// 			let data=JSON.parse(response.body);
+// 			let udata=parseInt(data.uId);
+// 		//console.log(data);
+// 				if(data.baseResponse.statusCode === '999'){
+// 				console.log(data.message);
+// 				// app.get('/',function(req,res){
+// 				// 			console.log("redirected");
+// 				// 			res.redirect('/profile');
+// 				// });
+// 				//window.location.replace("https://www.google.com");
+// 					//  request({
+// 					// 	host: 'localhost:8080',
+// 					// 	path: '/redirect_r/'+udata,
+// 					// }, function (response) {
+// 					// 	console.log("done redirecting");
+// 					// });
+// 				}else{
+// 					//res.send(response.statuscode);
+// 						console.log('error' + response.statusCode);
+// 				}
+// 		});
+// 	}, 10000);
+// //}
 
 app.get("/logout",function(req,res){
 		req.logout();
 		res.redirect("/login");
 });
+
+// app.get("/profile/maps",function(req,res){
+// 	res.render("/maps");
+// });
+function isLoggedin(req,res,next){
+	if(req.isAuthenticated()){
+		return true;
+	}
+	return false;
+}
 
 function isLoggedIn(req,res,next){
 		if(req.isAuthenticated()){
